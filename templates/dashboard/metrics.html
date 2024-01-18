@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 8px; /* Espacio entre celdas */
+    }
+
+    .table th, .table td {
+        text-align: center; /* Centrado horizontal */
+        vertical-align: middle; /* Centrado vertical */
+    }
+    
+    
+    .table thead th:not(:first-child) {
+      background-color: black;
+      color: white;
+      padding: 10px; /* Relleno para los encabezados */
+    }
+    
+    .table tbody td {
+      border: 1px solid black; /* Borde para las celdas */
+      padding: 5px; /* Espacio entre el contenido y el borde de las celdas */
+    }
+    
+    .table tbody td:first-child {
+      border: none; /* No hay bordes para la primera celda (donde están las imágenes) */
+    }
+    
+    /* Ajuste para las imágenes para alinearlas verticalmente al centro */
+    .table img {
+    vertical-align: middle;
+    width: auto; /* Se asegura de que las imágenes no se estiren */
+    height: auto; /* Se asegura de que las imágenes mantengan su proporción */
+    max-height: 50px; /* Limita el tamaño de las imágenes */
+    }
+
+    /* Media query para pantallas pequeñas */
+    @media (max-width: 768px) {
+    .table thead {
+        display: none; /* Oculta los encabezados en dispositivos pequeños */
+    }
+
+    .table tbody td {
+        display: block; /* Las celdas se comportan como bloques */
+        width: 100%; /* Ocupan todo el ancho disponible */
+        box-sizing: border-box; /* Calcul
+    }
+}
+        </style>
+<div class="container">
+
+    <!-- Sección de tarjetas para los últimos bloques -->
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>Last Blocks</h2>
+        </div>
+        {% for block in values_last_blocks %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Block {{ block.number_block }}</h5>
+                        <p class="card-text">Number of transactions: {{ block.number_txns }}</p>
+                        <p class="card-text">Average fees: {{ block.fees_avg|floatformat:2 }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <br>
+    </div>
+   
+    
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+            <h3>Number of Transactions</h3>
+            <div class="graph-section">
+                {{ plot|safe }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <br>
+            <h3>Fees</h3>
+            <div class="graph-section">
+                {{ plot2|safe }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+        <br>
+        <br>
+            <h3>Vara Ecosystem and Integrations</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>DAPP</th>
+                    <th>AGE</th>
+                    <th>SECTOR</th>
+                    <th>WEEKLY ACTIVE ADDRESSES</th>
+                    <th>USER SHARE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="{% static 'img/vara/zenlink_icon.jpeg' %}" alt="Zenlink" /> </td>
+                    <td>ZENLINK</td>
+                    <td>10 MO</td>
+                    <td>DEFI</td>
+                    <td>956K</td>
+                    <td>12%</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'img/vara/bounce_finance_icon.jpeg' %}" alt="Bounce Finance" /> </td>
+                    <td>BOUNCE FINANCE</td>
+                    <td>1 YEAR</td>
+                    <td>DEFI, INFRA</td>
+                    <td>452K</td>
+                    <td>23%</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'img/vara/subsquid_icon.jpeg' %}" alt="Subsquid" /> </td>
+                    <td>SUBSQUID</td>
+                    <td>13 MO</td>
+                    <td>INFRA</td>
+                    <td>526K</td>
+                    <td>12%</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'img/vara/polkaassembly_icon.jpeg' %}" alt="Polkaassembly" /> </td>
+                    <td>POLKASSEMBLY</td>
+                    <td>3 YEAR</td>
+                    <td>JAO, INFRA</td>
+                    <td>412K</td>
+                    <td>15%</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'img/vara/dia_data_icon.jpeg' %}" alt="DIA Data" /> </td>
+                    <td>DIA DATA</td>
+                    <td>23 MON</td>
+                    <td>GAMEFI, ORACLE</td>
+                    <td>500K</td>
+                    <td>15%</td>
+                </tr>
+                <tr>
+                    <td><img src="{% static 'img/vara/rmrk_icon.jpeg' %}" alt="RMRK" /> </td>
+                    <td>RMRK</td>
+                    <td>3 YEAR</td>
+                    <td>NFT</td>
+                    <td>600K</td>
+                    <td>20%</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        </div>
+    
+    </div>
+</div>
+{% endblock %}
